@@ -1,0 +1,57 @@
+import React, { useRef } from 'react'; // useRef 추가
+
+import './landing_page_banner.css';
+import logo from './images/logo.png'; 
+
+function Header({ vrArchivingRef, videoBoardRef }) {
+	 console.log(vrArchivingRef, videoBoardRef); // 이 줄을 추가하여 확인
+
+	
+	const handleLoginClick = () => {
+        alert('로그인 버튼이 클릭되었습니다.');
+    };
+    
+    const handleNavLinkClick = (e, id) => {
+	    e.preventDefault(); // 기본 링크 동작 방지
+	    console.log(vrArchivingRef, videoBoardRef);
+	    if (id === 'VR아카이빙' && vrArchivingRef.current) {
+	        vrArchivingRef.current.scrollIntoView({ behavior: 'smooth' });            
+	    } else if  (id === '영상게시판' && videoBoardRef.current){
+	        videoBoardRef.current.scrollIntoView({ behavior: 'smooth' });         
+	    } else {
+	        alert(`${id} 메뉴가 클릭되었습니다.`);
+	        // 다른 id에 대한 처리...
+	    }
+    };
+          
+    
+	const handleSignupClick = () => {
+        alert('회원가입 버튼이 클릭되었습니다.');
+    };
+    
+    const handleLogoClick = () => {
+        alert('로고 이미지가 클릭되었습니다.');
+    };
+    		
+    return (
+        <header id="header">
+            <div className="logo">
+				<a href="#" onClick={handleLogoClick}>
+            		<img src={logo} alt="로고 이미지" />
+	            </a>            
+            </div>
+            <div className="navigation">
+                <span onClick={(e) => handleNavLinkClick(e, 'HOME')}>HOME</span>
+                <span onClick={(e) => handleNavLinkClick(e, 'VR아카이빙')}>VR아카이빙</span>
+                <span onClick={(e) => handleNavLinkClick(e, '영상게시판')}>영상게시판</span>                
+                <span onClick={(e) => handleNavLinkClick(e, '디지털조감도')}>디지털조감도</span>
+            </div>
+            <div className="buttons">
+                <button onClick={handleLoginClick}>로그인</button>
+                <button onClick={handleSignupClick}>회원가입</button>
+            </div>
+        </header>
+    );
+}
+
+export default Header;
